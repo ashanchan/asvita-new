@@ -1,0 +1,54 @@
+<div class="w3-container">
+    <header class="w3-container w3-blue">
+        <h4>Reset Password</h4>
+    </header>
+
+    <form class="" [formGroup]="form" (submit)="onSubmit()">
+        <p>
+            <label class="w3-text-blue"><b>User Id</b></label>
+            <input type="text" class="w3-input w3-border" placeholder="Enter registerd UserId" formControlName="userId">
+        </p>
+
+        <p>
+            <label class="w3-text-blue"><b>Current Password</b></label>
+            <input type="password" class="w3-input w3-border" placeholder="Enter Valid Password" formControlName="password">
+        </p>
+
+        <p>
+            <label class="w3-text-blue"><b>New Password</b></label>
+            <input type="password" class="w3-input w3-border" placeholder="Enter New Password" formControlName="newPassword">
+        </p>
+
+        <p>
+            <label class="w3-text-blue"><b>Confirm Password</b></label>
+            <input type="password" class="w3-input w3-border" placeholder="Confrim Password" formControlName="confirmPassword">
+        </p>
+
+        <p>
+            <button type="submit" class="w3-btn w3-blue w3-right" [disabled]="!form.valid"><i class="fa fa-check-circle"></i> Login</button>
+        </p>
+
+        <br><br>
+
+    </form>
+
+    <footer class="w3-container w3-blue">
+        <div class="w3-row">
+            <div class="w3-third w3-center">
+                <a [routerLink]="'login/register'">
+                    <p>Register</p>
+                </a>
+            </div>
+            <div class="w3-third w3-center">
+                <a [routerLink]="'login/forgot'">
+                    <p>Forgot</p>
+                </a>
+            </div>
+            <div class="w3-third w3-center">
+                <a [routerLink]="'login/change'">
+                    <p>Change</p>
+                </a>
+            </div>
+        </div>
+    </footer>
+</div>

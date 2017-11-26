@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    margin-top: 75px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 40%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+.loader {
+    background: #333 url('assets/images/loader.gif') no-repeat 50% 50%;
+    -webkit-transition: background-color 0;
+    transition: background-color 0;
+    height: 650px;
+}
+
+.thumbnail .caption {
+    color: #FFF;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.thumbnail img {
+    width: 125px;
+    height: 125px;
+}
+
+.condensed {
+    padding: 0 5px;
+}
+
+.table-condensed>tbody>tr>td,
+.table-condensed>tbody>tr>th,
+.table-condensed>tfoot>tr>td,
+.table-condensed>tfoot>tr>th,
+.table-condensed>thead>tr>td,
+.table-condensed>thead>tr>th {
+    padding: 5px 2px;
+}
+
+textarea .no-resize {
+    resize: none;
+}
+
+.normal-font {
+    font-weight: 100;
+}

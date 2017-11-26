@@ -1,0 +1,15 @@
+.medicine td:nth-child(1) {
+    width: 3px;
+    vertical-align: middle;
+}
+
+.medicine td:nth-child(3),
+.medicine td:nth-child(4),
+.medicine td:nth-child(5),
+.medicine td:nth-child(6),
+.medicine td:nth-child(7),
+.medicine td:nth-child(8),
+.medicine td:nth-child(9),
+.medicine td:nth-child(10) {
+    width: 62px;
+}

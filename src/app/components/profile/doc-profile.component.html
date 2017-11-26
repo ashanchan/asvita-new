@@ -1,0 +1,129 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+    <div class="col-sm-6 col-md-6">
+        <div class="thumbnail">
+            <div class="caption bg-primary">General Information</div>
+            <div class="form-group">
+                <label class="control-label">Full Name</label>
+                <input type="text" class="form-control" id="fullName" formControlName="fullName" placeholder="fullName" [readonly]="readonly" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Contact Number</label>
+                <input type="text" class="form-control" id="mobile" formControlName="mobile" placeholder="Contact Number" [readonly]="readonly" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Specialization</label>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4" *ngFor="let special of specialization">
+                    <label class="normal-font">
+                            <input type="checkbox" name="special" id="special" [value]="special.label" [checked]='special.checked' [disabled]="readonly" (change)="onCheckBoxClicked('specialization', $event.target.value, $event.target.checked)">
+                            {{special.label}}
+                          </label>
+                </div>
+            </div>
+
+            <br>
+            <div class="form-group">
+                <label class="control-label">Medical Qualification</label>
+                <textarea rows="3" cols="50" type="text" class="form-control no-resize" id="qualification" formControlName="qualification" placeholder="qualification" [readonly]="readonly"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Other Medical Specialization</label>
+                <input type="text" class="form-control" id="specializationOther" formControlName="specializationOther" placeholder="Other Medical Specialization" [readonly]="readonly" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-6 col-md-6">
+
+        <div class="thumbnail">
+            <div class="caption bg-primary">Clinic/Hospital Information</div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination" style="margin: 0; float:right; margin-bottom:5px;">
+                    <li *ngFor="let page of form.get('clinic').controls; let i = index;" (click)="onClinicChange(i)" style="cursor:pointer" [ngClass]="{'active' : clinicIdx === i }">
+                        <a [innerHTML]="i+1"></a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div formArrayName="clinic" *ngFor="let item of form.get('clinic').controls; let i = index;">
+                <div id="clinic{{i}}" [hidden]="i !== clinicIdx">
+                    <div [formGroupName]="i">
+                        <div class="form-group">
+                            <label class="control-label">Clinic Name</label>
+                            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Clinic Name" [readonly]="readonly">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Clinic Number</label>
+                            <input type="text" class="form-control" id="contact" formControlName="contact" placeholder="Clinic Number" [readonly]="readonly">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Address</label>
+                            <textarea rows="3" cols="50" type="text" class="form-control no-resize" id="address" formControlName="address" placeholder="Clinic address" [readonly]="readonly"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">City</label>
+                                    <input type="text" class="form-control" id="city" formControlName="city" placeholder="city" [readonly]="readonly" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Pin</label>
+                                    <input type="text" class="form-control" id="pin" formControlName="pin" placeholder="pin" [readonly]="readonly" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">State</label>
+                                    <input type="text" class="form-control" id="state" formControlName="state" placeholder="state" [readonly]="readonly" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Open From</label>
+                                    <input type="text" class="form-control" id="openTime" formControlName="openTime" placeholder="openTime" [readonly]="readonly" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Open Till</label>
+                                    <input type="text" class="form-control" id="endTime" formControlName="endTime" placeholder="endTime" [readonly]="readonly" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3" *ngFor="let day of clinicDays">
+                                        <label class="normal-font">
+                                                <input type="checkbox" name="day" id="day" [value]="day.label" [checked]='day.checked' [disabled]="readonly" (change)="onCheckBoxClicked('day', $event.target.value, $event.target.checked)">
+                                                {{day.label}}
+                                              </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:60px;">
+                <br>
+                <button *ngIf="readonly" class="btn btn-primary pull-right" (click)="update(false)"><i class="fa fa-check-circle"></i> Update Profile</button>
+                <button *ngIf="!readonly" class="btn btn-primary pull-right" [disabled]="!form.valid"><i class="fa fa-check-circle"></i> Save Profile</button>
+            </div>
+        </div>
+    </div>
+</form>
