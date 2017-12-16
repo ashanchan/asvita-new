@@ -1,11 +1,10 @@
-<div class="col-md-6 col-md-offset-5">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>Forgot Password</h4>
-        </div>
-        <div class="panel-body">
-            <div class="container-fluid">
-                <form class="form-horizontal" [formGroup]="form" (submit)="onSubmit()">
+<form class="form-horizontal" [formGroup]="form" (submit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-5">
+            <div class="thumbnail">
+                <div class="caption bg-primary">Forgot Password</div>
+
+                <div class="container-fluid">
                     <div class="form-group">
                         <label class="control-label">Enter your registered email Id</label>
                         <input type="email" class="form-control" id="email" formControlName="email" placeholder="Registered Email" />
@@ -13,19 +12,23 @@
                     <div class="form-group">
                         <button class="btn btn-primary pull-right" [disabled]="!form.valid"><i class="fa fa-check-circle"></i> Request</button>
                     </div>
-                </form>
-            </div>
-            <div class="alert alert-danger" *ngIf="hasError" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span [innerHTML]="errMsg"></span>
-            </div>
-        </div>
-        <div class="panel-footer">
+                </div>
 
-            <a [routerLink]="''">
-                <p class="text-right">Login</p>
-            </a>
+                <div class="alert alert-danger" *ngIf="hasError" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span [innerHTML]="errMsg"></span>
+                </div>
 
+                <div class="bg-success" style="padding-top:10px;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a [routerLink]="''">
+                                <p class="text-center">Login</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</form>

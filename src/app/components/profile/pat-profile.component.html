@@ -1,137 +1,138 @@
 <form [formGroup]="form" (submit)="onSubmit()">
-    <div class="col-sm-6 col-md-6">
-        <div class="thumbnail">
-            <div class="caption bg-primary">General Information</div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <div class="thumbnail">
+                <div class="caption bg-primary">General Information</div>
 
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label"> Gender</label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label"> Gender</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="normal-font"><input type="radio"  value="m" formControlName="gender" [disabled]="readonly" > Male</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="normal-font"><input type="radio"  value="m" formControlName="gender" [disabled]="readonly" > Male</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="normal-font"><input type="radio" value="f" formControlName="gender" [disabled]="readonly" > Female</label>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="normal-font"><input type="radio" value="f" formControlName="gender" [disabled]="readonly" > Female</label>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" formControlName="fullName" placeholder="fullName" [readonly]="readonly" />
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label">Full Name</label>
-                <input type="text" class="form-control" id="fullName" formControlName="fullName" placeholder="fullName" [readonly]="readonly" />
-            </div>
+                <div class="form-group">
+                    <label class="control-label">Contact Number</label>
+                    <input type="text" class="form-control" id="mobile" formControlName="mobile" placeholder="Contact Number" [readonly]="readonly" />
+                </div>
 
-            <div class="form-group">
-                <label class="control-label">Contact Number</label>
-                <input type="text" class="form-control" id="mobile" formControlName="mobile" placeholder="Contact Number" [readonly]="readonly" />
-            </div>
+                <div class="form-group">
+                    <label class="control-label">Address</label>
+                    <textarea rows="3" cols="50" type="text" class="form-control no-resize" id="address" formControlName="address" placeholder="Enter your address" [readonly]="readonly"></textarea>
+                </div>
 
-            <div class="form-group">
-                <label class="control-label">Address</label>
-                <textarea rows="3" cols="50" type="text" class="form-control no-resize" id="address" formControlName="address" placeholder="Enter your address" [readonly]="readonly"></textarea>
-            </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">City</label>
+                            <input type="text" class="form-control" id="city" formControlName="city" placeholder="city" [readonly]="readonly" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Pin</label>
+                            <input type="text" class="form-control" id="pin" formControlName="pin" placeholder="pin" [readonly]="readonly" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">State</label>
+                            <input type="text" class="form-control" id="state" formControlName="state" placeholder="state" [readonly]="readonly" />
+                        </div>
+                    </div>
+                </div>
 
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label">City</label>
-                        <input type="text" class="form-control" id="city" formControlName="city" placeholder="city" [readonly]="readonly" />
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Weight</label>
+                            <input type="text" class="form-control" id="weight" formControlName="weight" placeholder="in Kgs" [readonly]="readonly" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Height</label>
+                            <input type="text" class="form-control" id="height" formControlName="height" placeholder="in cms" [readonly]="readonly" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Date of Birth</label>
+                            <input type="date" class="form-control" id="dob" formControlName="dob" [readonly]="readonly" />
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label">Pin</label>
-                        <input type="text" class="form-control" id="pin" formControlName="pin" placeholder="pin" [readonly]="readonly" />
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">State</label>
-                        <input type="text" class="form-control" id="state" formControlName="state" placeholder="state" [readonly]="readonly" />
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label">Weight</label>
-                        <input type="text" class="form-control" id="weight" formControlName="weight" placeholder="in Kgs" [readonly]="readonly" />
-                    </div>
+                <div class="form-group">
+                    <label class="control-label">Emergency Contact Person</label>
+                    <input type="text" class="form-control" id="sosPerson" formControlName="sosPerson" placeholder="SOS Person" [readonly]="readonly" />
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label">Height</label>
-                        <input type="text" class="form-control" id="height" formControlName="height" placeholder="in cms" [readonly]="readonly" />
-                    </div>
+                <div class="form-group">
+                    <label class="control-label">Emergency Contact Number</label>
+                    <input type="text" class="form-control" id="sosMobile" formControlName="sosMobile" placeholder="SOS Number" [readonly]="readonly" />
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Date of Birth</label>
-                        <input type="date" class="form-control" id="dob" formControlName="dob" [readonly]="readonly" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label">Emergency Contact Person</label>
-                <input type="text" class="form-control" id="sosPerson" formControlName="sosPerson" placeholder="SOS Person" [readonly]="readonly" />
-            </div>
-            <div class="form-group">
-                <label class="control-label">Emergency Contact Number</label>
-                <input type="text" class="form-control" id="sosMobile" formControlName="sosMobile" placeholder="SOS Number" [readonly]="readonly" />
             </div>
         </div>
-    </div>
 
+        <div class="col-sm-6 col-md-6">
+            <div class="thumbnail">
+                <div class="caption bg-primary">Medical Information</div>
 
-    <div class="col-sm-6 col-md-6">
-        <div class="thumbnail">
-            <div class="caption bg-primary">Medical Information</div>
+                <div class="form-group">
+                    <label class="control-label">Medical History</label>
+                    <input type="text" class="form-control" id="medicalHistory" formControlName="medicalHistory" placeholder="SOS Number" [readonly]="readonly" />
+                </div>
 
-            <div class="form-group">
-                <label class="control-label">Medical History</label>
-                <input type="text" class="form-control" id="medicalHistory" formControlName="medicalHistory" placeholder="SOS Number" [readonly]="readonly" />
-            </div>
-
-            <div class="row">
-                <div class="col-md-4" *ngFor="let history of medicalHistory">
-                    <label class="normal-font">
+                <div class="row">
+                    <div class="col-md-4" *ngFor="let history of medicalHistory">
+                        <label class="normal-font">
                         <input type="checkbox" name="history" id="history" [value]="history.label" [checked]='history.checked' [disabled]="readonly"
                         (change)="onCheckBoxClicked($event.target.value, $event.target.checked)">
                         {{history.label}}
                       </label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <br>
-                <label class="control-label">Any Other Medical History</label>
-                <textarea rows="3" cols="50" type="text" class="form-control no-resize" id="medicalHistoryOther" formControlName="medicalHistoryOther" placeholder="Enter Any Other Medical History" [readonly]="readonly"></textarea>
-            </div>
+                <div class="form-group">
+                    <br>
+                    <label class="control-label">Any Other Medical History</label>
+                    <textarea rows="3" cols="50" type="text" class="form-control no-resize" id="medicalHistoryOther" formControlName="medicalHistoryOther" placeholder="Enter Any Other Medical History" [readonly]="readonly"></textarea>
+                </div>
 
-            <div class="form-group">
-                <label class="control-label">Life Style</label>
-                <textarea rows="3" cols="50" type="text" class="form-control no-resize" id="lifeStyle" formControlName="lifeStyle" placeholder="Enter lifeStyle" [readonly]="readonly"></textarea>
-            </div>
+                <div class="form-group">
+                    <label class="control-label">Life Style</label>
+                    <textarea rows="3" cols="50" type="text" class="form-control no-resize" id="lifeStyle" formControlName="lifeStyle" placeholder="Enter lifeStyle" [readonly]="readonly"></textarea>
+                </div>
 
-            <div class="form-group">
-                <label class="control-label">Notes</label>
-                <textarea rows="3" cols="50" type="text" class="form-control no-resize" id="notes" formControlName="notes" placeholder="Enter any notes" [readonly]="readonly"></textarea>
-            </div>
+                <div class="form-group">
+                    <label class="control-label">Notes</label>
+                    <textarea rows="3" cols="50" type="text" class="form-control no-resize" id="notes" formControlName="notes" placeholder="Enter any notes" [readonly]="readonly"></textarea>
+                </div>
 
-            <div class="caption">
-            </div>
+                <div class="caption">
+                </div>
 
-            <div style="height:50px;">
-                <button *ngIf="readonly" class="btn btn-primary pull-right" (click)="update(false)"><i class="fa fa-check-circle"></i> Update Profile</button>
-                <button *ngIf="!readonly" class="btn btn-primary pull-right" [disabled]="!form.valid"><i class="fa fa-check-circle"></i> Save Profile</button>
+                <div style="height:50px;">
+                    <button *ngIf="readonly" class="btn btn-primary pull-right" (click)="update(false)"><i class="fa fa-check-circle"></i> Update Profile</button>
+                    <button *ngIf="!readonly" class="btn btn-primary pull-right" [disabled]="!form.valid"><i class="fa fa-check-circle"></i> Save Profile</button>
+                </div>
             </div>
         </div>
     </div>

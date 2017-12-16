@@ -1,24 +1,51 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4>Search Registered User</h4>
-    </div>
-    <div class="panel-body">
-        <div class="container-fluid">
-            <form class="form-horizontal" [formGroup]="form" (submit)="onSubmit()">
-                <div class="form-group">
-                    <label class="control-label">Enter User Id</label>
-                    <input type="email" class="form-control" id="email" formControlName="userId" placeholder="User Id" />
-                    <label class="control-label">Name</label>
-                    <input type="email" class="form-control" id="email" formControlName="name" placeholder="User Id" />
+<form [formGroup]="form" (submit)="onSubmit()">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="thumbnail">
+                <div class="caption bg-primary">Search Registered User</div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">UserId</label>
+                            <input type="text" class="form-control" id="userId" placeholder="User Id" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Name</label>
+                            <input type="text" class="form-control" id="fullName" placeholder="Name" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Pin Code</label>
+                            <input type="text" class="form-control" id="pin" placeholder="Pin" />
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-primary pull-right" [disabled]="!form.valid"><i class="fa fa-check-circle"></i> Register</button>
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <div style="height:50px;">
+                            <button class="btn btn-primary pull-right" [disabled]="!form.valid"><i class="fa fa-search"></i> Search</button>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-        <div class="alert alert-danger" *ngIf="hasError" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span [innerHTML]="errMsg"></span>
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="thumbnail">
+                <div class="caption bg-primary">Search Results</div>
+
+                <div class="info-box">UserId</div>
+
+            </div>
+        </div>
+    </div>
+
+</form>

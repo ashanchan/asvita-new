@@ -1,63 +1,69 @@
-<div class="row" *ngIf="medicalRecord">
-    <div class="thumbnail">
-        <div class="caption bg-primary">
-            Last Medical Record
-        </div>
-        <div class="table-responsive">
-            <table class="table table-striped table-condensed">
-                <tr>
-                    <td rowspan="5">
-                        <img [src]="medicalRecord['doctorImg'] | profileImg " alt="Avatar" class="img-rounded pull-left">
-                    </td>
-                    <td>Doctor Id</td>
-                    <td [innerHTML]="medicalRecord['doctorId']"></td>
-                </tr>
-                <tr>
-                    <td>Doctor Name</td>
-                    <td [innerHTML]="medicalRecord['doctorName']"></td>
-                </tr>
-                <tr>
-                    <td>Presc Id</td>
-                    <td [innerHTML]="medicalRecord['prescriptionId']"></td>
-                </tr>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="thumbnail">
+            <div class="caption bg-primary">
+                Last Medical Record
+            </div>
+            <div *ngIf="!medicalRecord">
+                No medical history found..
+            </div>
+            <div class="table-responsive" *ngIf="medicalRecord">
+                <table class="table table-striped table-condensed">
+                    <tr>
+                        <td rowspan="4" width="130px">
+                            <img [src]="medicalRecord['doctorImg'] | profileImg " alt="Avatar" class="img-rounded pull-left">
+                        </td>
+                        <td width="25%">Doctor Id</td>
+                        <td width="25%" [innerHTML]="medicalRecord['doctorId']"></td>
+                        <td>Presc Id</td>
+                        <td [innerHTML]="medicalRecord['prescriptionId']"></td>
+                    </tr>
+                    <tr>
+                        <td>Last App</td>
+                        <td [innerHTML]="medicalRecord['recordDate'] | date : shortDate"></td>
+                        <td>Next App</td>
+                        <td [innerHTML]="medicalRecord['followUp'] | date : shortDate"></td>
+                    </tr>
+                    <tr>
+                        <td width="25%">Diagnosis</td>
+                        <td width="25%" [innerHTML]="medicalRecord['diagnosis']"></td>
+                        <td>Inv Advised</td>
+                        <td [innerHTML]="medicalRecord['invAdvised']"></td>
+                    </tr>
 
-                <tr>
-                    <td>Last App</td>
-                    <td [innerHTML]="medicalRecord['recordDate'] | date : shortDate"></td>
-                </tr>
-                <tr>
-                    <td>Next App</td>
-                    <td [innerHTML]="medicalRecord['doctorId']"></td>
-                </tr>
-            </table>
-            <table class="table table-striped table-condensed">
-                <tr>
-                    <td>Medicine Name</td>
-                    <td>bbf</td>
-                    <td>abf</td>
-                    <td>bl</td>
-                    <td>al</td>
-                    <td>eve</td>
-                    <td>bd</td>
-                    <td>ad</td>
-                    <td>day</td>
-                </tr>
-                <tr *ngFor="let medicine of medicalRecord.medicine; let i=index">
-                    <td>{{medicine['medName']}}</td>
-                    <td>{{medicine['bbf']}}</td>
-                    <td>{{medicine['abf']}}</td>
-                    <td>{{medicine['bl']}}</td>
-                    <td>{{medicine['al']}}</td>
-                    <td>{{medicine['eve']}}</td>
-                    <td>{{medicine['bd']}}</td>
-                    <td>{{medicine['ad']}}</td>
-                    <td>{{medicine['day']}}</td>
-                </tr>
-            </table>
+                </table>
+
+                <table class="table table-striped table-condensed">
+                    <tr>
+                        <td>Medicine Name</td>
+                        <td>bbf</td>
+                        <td>abf</td>
+                        <td>bl</td>
+                        <td>al</td>
+                        <td>eve</td>
+                        <td>bd</td>
+                        <td>ad</td>
+                        <td>day</td>
+                    </tr>
+                    <tr *ngFor="let medicine of medicalRecord.medicine; let i=index">
+                        <td>{{medicine['medName']}}</td>
+                        <td>{{medicine['bbf']}}</td>
+                        <td>{{medicine['abf']}}</td>
+                        <td>{{medicine['bl']}}</td>
+                        <td>{{medicine['al']}}</td>
+                        <td>{{medicine['eve']}}</td>
+                        <td>{{medicine['bd']}}</td>
+                        <td>{{medicine['ad']}}</td>
+                        <td>{{medicine['day']}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="row" *ngIf="medicalRecord">
-    <app-connection [showDropDown]="showDropDown"></app-connection>
+    <div class="col-sm-12 col-md-12">
+        <app-connection [showDropDown]="showDropDown"></app-connection>
+    </div>
 </div>

@@ -1,11 +1,10 @@
-<div class="col-md-6 col-md-offset-5">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>User Login</h4>
-        </div>
-        <div class="panel-body">
-            <div class="container-fluid">
-                <form class="form-horizontal" [formGroup]="form" (submit)="onSubmit()">
+<form class="form-horizontal" [formGroup]="form" (submit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-5">
+            <div class="thumbnail">
+                <div class="caption bg-primary">User Login</div>
+
+                <div class="container-fluid">
                     <div class="form-group">
                         <label class="control-label">Registered Email</label>
                         <input type="email" class="form-control" id="email" formControlName="email" placeholder="Registered Email" />
@@ -17,27 +16,29 @@
                     <div class="form-group">
                         <button class="btn btn-primary pull-right" [disabled]="!form.valid"><i class="fa fa-check-circle"></i> Login</button>
                     </div>
-                </form>
-            </div>
-            <div class="alert alert-danger" *ngIf="hasError" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span [innerHTML]="errMsg"></span>
-            </div>
-        </div>
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-sm-6">
-                    <a [routerLink]="'login/register'">
-                        <p class="text-center">Register</p>
-                    </a>
                 </div>
 
-                <div class="col-sm-6">
-                    <a [routerLink]="'login/forgot'">
-                        <p class="text-center">Forgot</p>
-                    </a>
+                <div class="alert alert-danger" *ngIf="hasError" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span [innerHTML]="errMsg"></span>
+                </div>
+
+                <div class="bg-success" style="padding-top:10px;">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a [routerLink]="'register'">
+                                <p class="text-center">Register</p>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <a [routerLink]="'forgot'">
+                                <p class="text-center">Forgot</p>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>

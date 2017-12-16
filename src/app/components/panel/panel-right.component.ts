@@ -27,7 +27,9 @@ export class PanelRightComponent implements OnInit, OnDestroy {
   }
   //==============================================================================
   public ngOnDestroy() {
-    this.subscription.unsubscribe();
+    alert('ngOnDestroy of right');
+//    this.subscription.unsubscribe();
+    this.isActive = false;
   }
   //==============================================================================
   private onMessageReceived(message: HttpResponse): void {
@@ -42,33 +44,37 @@ export class PanelRightComponent implements OnInit, OnDestroy {
         break;
 
       case 'onGetConnectionResponse':
+        this.dataService.setConnectionList(message.responseData.data);
+        this.getSubscription();
+        break;
+
+      case 'onGetSubscriptionResponse':
+        this.dataService.setSubscription('usedSpace', message.responseData.data.diskSpace);
         let profileInfo = this.dataService.getProfileData();
         let profileSub = this.dataService.getSubscription();
-        this.dataService.setConnectionList(message.responseData.data);
         this.details['profileImgUrl'] = this.dataService.getFolderPath() + 'profile.jpg'
         this.details['userId'] = profileInfo['userId'];
+        this.details['email'] = profileInfo['email'];
         this.details['fullName'] = profileInfo['fullName'];
-        this.details['location'] = this.dataService.getProfileData().location;
+        this.details['location'] = profileInfo['location'];
         this.details['registeredOn'] = profileSub['registeredOn'];
         this.details['addOn'] = profileSub['addOn'];
         this.details['startFrom'] = profileSub['startFrom'];
         this.details['expiresOn'] = profileSub['expiresOn'];
         this.details['diskSpace'] = profileSub['diskSpace'];
         this.details['usedSpace'] = profileSub['usedSpace'];
-        this.getSubscription();
-        break;
-
-      case 'onGetSubscriptionResponse':
-        this.dataService.setSubscription('usedSpace', message.responseData.data.diskSpace);
         this.getPrescription();
         break;
 
       case 'onGetPrescriptionResponse':
         this.dataService.setPrescriptionData(message.responseData.data);
-          this.messageService.sendMessage({event:'onPrescriptionUpdated'});
-          this.onPanelLoaded();
+        this.messageService.sendMessage({ event: 'onPrescriptionUpdated' });
+        this.onPanelLoaded();
         break;
 
+      case 'onSelfDestroy':
+        this.ngOnDestroy();
+        break;  
     }
   }
   //==============================================================================

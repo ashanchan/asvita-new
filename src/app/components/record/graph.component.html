@@ -1,0 +1,180 @@
+<div [hidden]="mode === 'Graph'">
+    <div class="row">
+        <div [class]="colWidth" *ngFor="let info of trivia; let i = index;" name="info-box">
+            <div class="thumbnail">
+                <div class="caption bg-primary">
+                    <span class="title" [innerHTML]="info.label+extraTitle"></span>
+                    <span [hidden]="showForm">
+                        <i class="fa fa-bar-chart pull-right btn" (click)="onRecordClick(i, 'Graph')" title="Graph"></i>
+                        <i class="fa fa-pencil-square-o pull-right btn" (click)="onRecordClick(i, 'View')"title="View"></i>
+                        <i class="fa fa-plus-circle pull-right btn" (click)="onRecordClick(i, 'Add')" title="Add"></i>
+                    </span>
+                    <span [hidden]="!showForm">
+                    <i class="fa fa-refresh  pull-right btn" (click)="onRecordClick(i, 'Refresh')" title="Refresh"></i>
+                    <i class="fa fa-arrow-circle-left pull-right btn" (click)="onRecordClick(-1, 'back')" title="Back"></i>
+                </span>
+                </div>
+
+                <div class="info-box" [hidden]="showForm">
+                    <p [innerHTML]="info.info"></p>
+                </div>
+
+                <div class="record-box" *ngIf="showForm && mode === 'Add'">
+                    <form [formGroup]="form" (submit)="onSubmit()">
+                        <div class="form-group">
+                            <label class="control-label">Record Date</label>
+                            <input type="datetime-local" class="form-control" id="recordDate" formControlName="recordDate" placeholder="Date" size="100" [readonly]="readonly" />
+                        </div>
+                        <div [hidden]="idx !== 0">
+                            <div class="form-group">
+                                <label class="control-label">Height in cms</label>
+                                <input type="text" class="form-control" id="height" formControlName="height" placeholder="Height in cms" [readonly]="readonly" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Weight in Kgs</label>
+                                <input type="text" class="form-control" id="weight" formControlName="weight" placeholder="Weight in Kgs" [readonly]="readonly" />
+                            </div>
+                        </div>
+
+                        <div [hidden]="idx !== 1">
+                            <div class="form-group">
+                                <label class="control-label">Fasting</label>
+                                <input type="text" class="form-control" id="fasting" formControlName="fasting" placeholder="Height in cms" [readonly]="readonly" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Normal</label>
+                                <input type="text" class="form-control" id="normal" formControlName="normal" placeholder="Weight in Kgs" [readonly]="readonly" />
+                            </div>
+                        </div>
+
+                        <div [hidden]="idx !== 2">
+                            <div class="form-group">
+                                <label class="control-label">Systolic</label>
+                                <input type="text" class="form-control" id="systolic" formControlName="systolic" placeholder="Systolic in mmHg" [readonly]="readonly" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Diastolic</label>
+                                <input type="text" class="form-control" id="diastolic" formControlName="diastolic" placeholder="Diastolic in mmHg" [readonly]="readonly" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Pulse</label>
+                                <input type="text" class="form-control" id="pulse" formControlName="pulse" placeholder="Pulse beat" [readonly]="readonly" />
+                            </div>
+                        </div>
+
+                        <div [hidden]="idx !== 3">
+                            <div class="form-group">
+                                <label class="control-label">Temperature</label>
+                                <input type="text" class="form-control" id="temperature" formControlName="temperature" placeholder="Temperature in Fahrenheit" [readonly]="readonly" />
+                            </div>
+                        </div>
+
+                        <div style="height:50px;">
+                            <button class="btn btn-primary pull-right" [disabled]="!form.valid"><i class="fa fa-check-circle" title="Save"></i> Save Record</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="record-box" *ngIf="showForm && mode === 'View'">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-striped" [hidden]="idx !== 0">
+                            <tr class="bg-info">
+                                <td>Sr#</td>
+                                <td>Record Date</td>
+                                <td>Height (cms)</td>
+                                <td>Weight (kgs)</td>
+                                <td>BMI</td>
+                                <td>Status</td>
+                                <td>Action</td>
+                            </tr>
+                            <tr *ngFor="let record of graphRecord; let i = index;">
+                                <td [innerHTML]="i+1"></td>
+                                <td [innerHTML]="record.recordDate | date : shortDate"></td>
+                                <td [innerHTML]="record.height | number"></td>
+                                <td [innerHTML]="record.weight | number"></td>
+                                <td [innerHTML]="record.BMI | number"></td>
+                                <td [innerHTML]="record.status"></td>
+                                <td><i class="fa fa-trash-o btn" (click)="onRemoveClick(record._id)" title="Delete"></i></td>
+                            </tr>
+                        </table>
+
+                        <table class="table table-condensed table-striped" [hidden]="idx !== 1">
+                            <tr class="bg-info">
+                                <td>Sr#</td>
+                                <td>Record Date</td>
+                                <td>Fasting (mg/dl)</td>
+                                <td>Normal (mg/dl)</td>
+                                <td>Status</td>
+                                <td>Action</td>
+                            </tr>
+                            <tr *ngFor="let record of graphRecord; let i = index;">
+                                <td [innerHTML]="i+1"></td>
+                                <td [innerHTML]="record.recordDate | date : shortDate"></td>
+                                <td [innerHTML]="record.fasting | number"></td>
+                                <td [innerHTML]="record.normal | number"></td>
+                                <td [innerHTML]=""></td>
+                                <td><i class="fa fa-trash-o btn" (click)="onRemoveClick(record._id)" title="Delete"></i></td>
+                            </tr>
+                        </table>
+
+                        <table class="table table-condensed table-striped" [hidden]="idx !== 2">
+                            <tr class="bg-info">
+                                <td>Sr#</td>
+                                <td>Record Date</td>
+                                <td>Systolic (mmHg)</td>
+                                <td>Diastolic (mmHg)</td>
+                                <td>Pulse</td>
+                                <td>Status</td>
+                                <td>Action</td>
+                            </tr>
+                            <tr *ngFor="let record of graphRecord; let i = index;">
+                                <td [innerHTML]="i+1"></td>
+                                <td [innerHTML]="record.recordDate | date : shortDate"></td>
+                                <td [innerHTML]="record.systolic | number"></td>
+                                <td [innerHTML]="record.diastolic | number"></td>
+                                <td [innerHTML]="record.pulse | number"></td>
+                                <td [innerHTML]="record.status"></td>
+                                <td><i class="fa fa-trash-o btn" (click)="onRemoveClick(record._id)" title="Delete"></i></td>
+                            </tr>
+                        </table>
+
+                        <table class="table table-condensed table-striped" [hidden]="idx !== 3">
+                            <tr class="bg-info">
+                                <td>Sr#</td>
+                                <td>Record Date</td>
+                                <td>Temprature (F)</td>
+                                <td>Status</td>
+                                <td>Action</td>
+                            </tr>
+                            <tr *ngFor="let record of graphRecord; let i = index;">
+                                <td [innerHTML]="i+1"></td>
+                                <td [innerHTML]="record.recordDate | date : shortDate"></td>
+                                <td [innerHTML]="record.temperature | number"></td>
+                                <td [innerHTML]="record.status"></td>
+                                <td><i class="fa fa-trash-o btn" (click)="onRemoveClick(record._id)" title="Delete"></i></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [hidden]="mode !== 'Graph'">
+    <div class="row">
+        <div [class]="colWidth">
+            <div class="thumbnail">
+                <div class="caption bg-primary">
+                    <span class="title" [innerHTML]="graphTitle+extraTitle"></span>
+                    <span><i class="fa fa-refresh  pull-right btn" (click)="onRecordClick(i, 'Refresh')" title="Refresh"></i></span>
+                    <span><i class="fa fa-arrow-circle-left pull-right btn" (click)="onRecordClick(-1, 'back')" title="Back"></i></span>
+                </div>
+                <div id="graphDiv">
+                    <div id="plotDiv"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

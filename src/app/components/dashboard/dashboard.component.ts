@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   //==============================================================================
   private subscription: Subscription = new Subscription();
   private showDropDown:boolean = false;
-  private medicalRecord = { "doctorId": "DOC-XXXXXX", "recordDate": "2017-01-01", "prescriptionId": "XXXXXXX", "medicine": [{ "medName": "xxx", "bbf": "x", "abf": "x", "bl": "x", "al": "x", "eve": "x", "bd": "x", "ad": "x", "day": "x" }] };
+  private medicalRecord = null;
   //==============================================================================
   public ngOnInit() {
     this.subscription = this.messageService.getMessage().subscribe(message => {
@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private onMessageReceived(message: HttpResponse): void {
     switch (message.event) {
       case 'onPanelLoaded':
-        this.setDashboard();
+       this.setDashboard();
         break;
     }
   }

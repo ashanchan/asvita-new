@@ -27,8 +27,8 @@ export class PrescriptionComponent implements OnInit, OnDestroy {
   private hasError: boolean = false;
   private errMsg: string = '';
   private showDropDown: boolean = true;
-  private doctorId:string = '';
-  private patientId:string = '';
+  private doctorId: string = '';
+  private patientId: string = '';
   //==============================================================================
   public ngOnInit() {
     this.subscription = this.messageService.getMessage().subscribe(message => {
@@ -72,23 +72,29 @@ export class PrescriptionComponent implements OnInit, OnDestroy {
   //=======================================
   private resetForm() {
     var tDate = this.dataService.formatDate(new Date());
+    var hasRecord = this.record.length > 1;
+
+    if (!hasRecord) {
+      this.record.push ({doctorId: '', patientId:'', prescriptionId: '', recordDate:tDate, referred: '', medicine : [], diagnosis: '', followUp: '', invAdvised: '', notes: ''});
+    }
+
     this.form = this.formBuilder.group({
-      doctorId:  [this.readonly ? this.record[this.recordIdx]['doctorId'] : this.doctorId],
-      patientId: [this.readonly ? this.record[this.recordIdx]['patientId']: this.patientId],
-      prescriptionId: [this.readonly ? this.record[this.recordIdx]['prescriptionId']: '-'],
-      recordDate: [this.readonly ?this.record[this.recordIdx]['recordDate']: tDate],
-      referred: [this.readonly ?this.record[this.recordIdx]['referred']: ''],
-      medicine: [this.readonly ?this.record[this.recordIdx]['medicine']: []],
-      diagnosis: [this.readonly ? this.record[this.recordIdx]['diagnosis']: ''], 
-      followUp: [this.readonly ? this.record[this.recordIdx]['followUp']: ''],
-      invAdvised: [this.readonly ? this.record[this.recordIdx]['invAdvised']: ''],
-      notes: [this.readonly ? this.record[this.recordIdx]['notes']: '']
+      doctorId: [this.readonly ? this.record[this.recordIdx]['doctorId'] : this.doctorId],
+      patientId: [this.readonly ? this.record[this.recordIdx]['patientId'] : this.patientId],
+      prescriptionId: [this.readonly ? this.record[this.recordIdx]['prescriptionId'] : '-'],
+      recordDate: [this.readonly ? this.record[this.recordIdx]['recordDate'] : tDate],
+      referred: [this.readonly ? this.record[this.recordIdx]['referred'] : ''],
+      medicine: [this.readonly ? this.record[this.recordIdx]['medicine'] : []],
+      diagnosis: [this.readonly ? this.record[this.recordIdx]['diagnosis'] : ''],
+      followUp: [this.readonly ? this.record[this.recordIdx]['followUp'] : ''],
+      invAdvised: [this.readonly ? this.record[this.recordIdx]['invAdvised'] : ''],
+      notes: [this.readonly ? this.record[this.recordIdx]['notes'] : '']
     })
 
     var medicineObj: object = { medName: '', bbf: '', abf: '', bl: '', al: '', eve: '', bd: '', ad: '', day: '' };
     this.medicineList = [];
     for (let i = 0; i < 10; i++) {
-      if (this.record[this.recordIdx]['medicine'][i] && this.readonly) {
+      if (this.readonly && this.record[this.recordIdx]['medicine'][i]) {
         this.medicineList.push(this.record[this.recordIdx]['medicine'][i]);
       }
       else {
@@ -154,10 +160,9 @@ export class PrescriptionComponent implements OnInit, OnDestroy {
       }
     }
 
-    if(this.form.value['medicine'].length === 0)
-    {
+    if (this.form.value['medicine'].length === 0) {
       this.hasError = true;
-      this.errMsg =  'Please fill Prescription form';
+      this.errMsg = 'Please fill Prescription form';
     }
   }
   //=======================================
