@@ -25,9 +25,8 @@ export class PanelTopComponent implements OnInit, OnDestroy {
   }
   //==============================================================================
   public ngOnDestroy() {
-    alert('top destroyed');
-   
-    //this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
+    document.getElementsByClassName('top-navbar')[0]['style'].display='none';
   }
   //==============================================================================
   private onMessageReceived(message): void {
@@ -42,8 +41,7 @@ export class PanelTopComponent implements OnInit, OnDestroy {
         break;
 
       case 'onSelfDestroy':
-        //this.isActive = false;
-        //this.ngOnDestroy();
+        this.ngOnDestroy();
         break;
     }
   }

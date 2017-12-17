@@ -27,8 +27,7 @@ export class PanelRightComponent implements OnInit, OnDestroy {
   }
   //==============================================================================
   public ngOnDestroy() {
-    alert('ngOnDestroy of right');
-//    this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
     this.isActive = false;
   }
   //==============================================================================

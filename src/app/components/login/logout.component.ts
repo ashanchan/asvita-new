@@ -10,9 +10,11 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent implements OnInit {
+  private message:string = ''
   constructor(private messageService: MessageService, private dataService: DataService) { }
   //==============================================================================
   public ngOnInit() {
+    this.message = 'Bye bye '+this.dataService.getProfileData()['fullName']+'<br>You have been logged out successfully.<br>Refresh the browser or relogin Later.'
     this.dataService.destroyToken();
     this.messageService.sendMessage({ event: 'onSelfDestroy' });
   }
