@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.dataService.setSubscription('expiresOn',message.responseData.subscription.expiresOn);
           this.dataService.setSubscription('diskSpace',message.responseData.subscription.diskSpace);
           this.messageService.sendMessage({ event: 'onLoginSuccess' });
-          this.router.navigate(['./dashboard']);
+          this.router.navigate(['./dashboard'], { skipLocationChange: true });
         }
         else {
           this.hasError = true;

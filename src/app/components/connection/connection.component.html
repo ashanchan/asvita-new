@@ -1,10 +1,7 @@
 <div class="thumbnail">
     <div class="caption bg-primary">Connected Profile
         <div class="dropdown pull-right" *ngIf="showDropDown">
-            <button class="btn btn-default condensed btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Dropdown
-          <span class="caret"></span>
-        </button>
+            <button class="btn btn-default condensed btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Dropdown <span class="caret"></span></button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li *ngFor="let connection of connections; let i = index;" (click)="setConnection(i)">
                     <a [innerHTML]="connection['fullName']"></a>

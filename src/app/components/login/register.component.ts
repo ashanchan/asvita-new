@@ -26,7 +26,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     });
 
     this.form = this.formBuilder.group({
-      email: ['ashanchan@yahoo.com', Validators.compose([Validators.required, Validators.email])]
+      email: ['ashanchan@yahoo.com', Validators.compose([Validators.required, Validators.email])],
+      type: ['PAT', Validators.compose([Validators.required])],
     })
   }
   //==============================================================================
@@ -55,7 +56,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     httpRequest.formData['freeEntry'] = true;
     httpRequest.formData['recordLimit'] = 1;
     httpRequest.formData['urlExtn'] = 'read';
-    httpRequest.formData['type'] = 'pat';
     this.messageService.sendMessage(httpRequest);
   }
   //==============================================================================

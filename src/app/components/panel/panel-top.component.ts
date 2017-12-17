@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { MessageService } from '../../services/message.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-panel-top',
@@ -10,11 +11,12 @@ import { Subscription } from 'rxjs/Subscription';
 })
 
 export class PanelTopComponent implements OnInit, OnDestroy {
-  constructor(private messageService: MessageService, private dataService: DataService) { }
+  constructor(private messageService: MessageService, private dataService: DataService, private router: Router) { }
   //==============================================================================
   private subscription: Subscription = new Subscription();
-  private isActive:boolean = false;
-  private mode:string;
+  private isActive: boolean = false;
+  private mode: string;
+  private showLoader: boolean = false;
   //==============================================================================
   public ngOnInit() {
     this.subscription = this.messageService.getMessage().subscribe(message => {
@@ -24,6 +26,7 @@ export class PanelTopComponent implements OnInit, OnDestroy {
   //==============================================================================
   public ngOnDestroy() {
     this.subscription.unsubscribe();
+    document.getElementsByClassName('top-navbar')[0]['style'].display='none';
   }
   //==============================================================================
   private onMessageReceived(message): void {
@@ -31,9 +34,19 @@ export class PanelTopComponent implements OnInit, OnDestroy {
       case 'onPanelLoaded':
         this.mode = this.dataService.getUserMode();
         this.isActive = true;
-        this.subscription.unsubscribe();
+        break;
+
+      case 'onToggleLoader':
+        this.showLoader = message.mode;
+        break;
+
+      case 'onSelfDestroy':
+        this.ngOnDestroy();
         break;
     }
   }
   //==============================================================================
+  private routePath(url: string) {
+    this.router.navigate(['url'], { skipLocationChange: true });
+  }
 }

@@ -1,3 +1,5 @@
+<div id="overlay"></div>
+
 <div class="container-fluid">
     <div class="row-fluid">
         <app-panel-top></app-panel-top>
@@ -5,3 +7,22 @@
         <app-panel-right></app-panel-right>
     </div>
 </div>
+
+<div id="modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title"><i class="fa fa-info-circle"></i> <span [innerHTML]="popUpEvent.header"></span></h4>
+            </div>
+            <div class="modal-body">
+                <p [innerHTML]="popUpEvent.content"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modal-confirm" class="btn btn-primary" data-dismiss="modal" (click)="closePopUp(true)"><i class="fa fa-check-circle-o" ></i> Confirm</button>
+                <button type="button" id="modal-dismiss" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban" ></i> Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p id="popup-modal" data-toggle="modal" data-target="#modal"></p>
