@@ -9,16 +9,16 @@ import { HttpResponse } from '../../models/http-response';
 @Component({
   selector: 'app-connection',
   templateUrl: './connection.component.html',
-  styleUrls : ['./connection.component.css']
+  styleUrls: ['./connection.component.css']
 })
 
 export class ConnectionComponent implements OnInit, OnDestroy {
-  @Input() showDropDown:boolean;
+  @Input() showDropDown: boolean;
   @Output() onConnectionSelected: EventEmitter<string> = new EventEmitter<string>();
-  private connections:{}[]= [];
-  private requests:{}[]= [];
-  private currentConnection:string = '';
-  private connectionIdx:number;
+  private connections: {}[] = [];
+  private requests: {}[] = [];
+  private currentConnection: string = '';
+  private connectionIdx: number;
 
   constructor(private messageService: MessageService, private dataService: DataService) { }
   //==============================================================================
@@ -28,32 +28,7 @@ export class ConnectionComponent implements OnInit, OnDestroy {
     this.subscription = this.messageService.getMessage().subscribe(message => {
       this.onMessageReceived(message);
     });
-    
-    let fullList = this.dataService.getConnectionList();
-    let connection = this.dataService.getProfileData()['connection'];
-    let requested = this.dataService.getProfileData()['connectionReq'];
-    let ctr = connection.length;
-    let ftr = fullList.length;
-    let rtr = requested.length;
-
-    for(let i=0; i<ftr; i++)
-    {
-      for(let j=0; j<ctr; j++)
-      {
-        if(fullList[i]['userId'] === connection[j])
-        {
-          this.connections.push(fullList[i])      
-        }
-      }
-      
-      for(let k=0; k<ctr; k++)
-      {
-        if(fullList[i]['userId'] === requested[k])
-        {
-          this.requests.push(fullList[i])      
-        }
-      }
-    }
+    setTimeout(()=> this.createConnection(), 250);
   }
   //==============================================================================
   public ngOnDestroy() {
@@ -67,14 +42,37 @@ export class ConnectionComponent implements OnInit, OnDestroy {
     }
   }
   //==============================================================================
-  private setConnection(idx:number){
+  private createConnection() {
+    let fullList = this.dataService.getConnectionList();
+    let connection = this.dataService.getProfileData()['connection'];
+    let requested = this.dataService.getProfileData()['connectionReq'];
+    let ctr = connection.length;
+    let ftr = fullList.length;
+    let rtr = requested.length;
+
+    for (let i = 0; i < ftr; i++) {
+      for (let j = 0; j < ctr; j++) {
+        if (fullList[i]['userId'] === connection[j]) {
+          this.connections.push(fullList[i])
+        }
+      }
+
+      for (let k = 0; k < ctr; k++) {
+        if (fullList[i]['userId'] === requested[k]) {
+          this.requests.push(fullList[i])
+        }
+      }
+    }
+  }
+  //==============================================================================
+  private setConnection(idx: number) {
     this.connectionIdx = idx;
     this.currentConnection = this.connections[this.connectionIdx]['userId'];
   }
   //==============================================================================
-  private connectionSelected(){
+  private connectionSelected() {
     this.onConnectionSelected.emit(this.currentConnection);
   }
- //==============================================================================
- 
+  //==============================================================================
+
 }

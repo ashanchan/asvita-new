@@ -1,35 +1,51 @@
-<div class="thumbnail">
-    <div class="caption bg-primary">Connected Profile
-        <div class="dropdown pull-right" *ngIf="showDropDown">
-            <button class="btn btn-default condensed btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Dropdown <span class="caret"></span></button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li *ngFor="let connection of connections; let i = index;" (click)="setConnection(i)">
-                    <a [innerHTML]="connection['fullName']"></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2 thumb-center" *ngFor="let connection of connections; let i = index;" (click)="setConnection(i)">
-            <img [src]="connection['profileUrl']| profileImg " alt="Avatar " class="img-rounded" [ngClass]="{'pointer' : showDropDown }">
-            <p [innerHTML]="connection['fullName']" [ngClass]="{'bg-danger' : connectionIdx === i }"></p>
+{{connections.length}}
+<div class="row" *ngIf="connections && connections.length > 0">
+    <div class="col-sm-12 col-md-12">
+        <div class="thumbnail">
+            <div class="caption bg-primary">Connected Profile
+                <div class="dropdown pull-right" *ngIf="showDropDown">
+                    <button class="btn btn-default condensed btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Dropdown <span class="caret"></span></button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li *ngFor="let connection of connections; let i = index;" (click)="setConnection(i)">
+                            <a [innerHTML]="connection['fullName']"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <div class="col-md-2 thumb-center" *ngFor="let connection of connections; let i = index;" (click)="setConnection(i)">
+                        <img [src]="connection['profileUrl']| profileImg " alt="Avatar " class="img-rounded" [ngClass]="{'pointer' : showDropDown }">
+                        <p [innerHTML]="connection['fullName']" [ngClass]="{'bg-danger' : connectionIdx === i }"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="thumbnail" *ngIf="requests.length > 0">
+                <div class="caption bg-primary">Connection Requestd</div>
+
+                <div class="row">
+                    <div class="col-md-2" *ngFor="let request of requests">
+                        <img [src]="request['profileUrl']| profileImg " alt="Avatar " class="img-rounded">
+                        <p [innerHTML]="request['fullName']"></p>
+                    </div>
+                </div>
+            </div>
+
+            <p *ngIf="showDropDown" class="bg-danger"><b>Selected Connection</b>: {{currentConnection}}</p>
+
+            <button *ngIf="showDropDown" class="btn btn-primary pull-left" (click)="connectionSelected()" [disabled]="currentConnection === ''"><i class="fa fa-check-circle"></i> Submit Connection</button>
         </div>
     </div>
 </div>
 
 
-
-<div class="thumbnail" *ngIf="requests.length > 0">
-    <div class="caption bg-primary">Connection Requestd</div>
-
-    <div class="row">
-        <div class="col-md-2" *ngFor="let request of requests">
-            <img [src]="request['profileUrl']| profileImg " alt="Avatar " class="img-rounded">
-            <p [innerHTML]="request['fullName']"></p>
+<div class="row" *ngIf="connections && connections.length === 0">
+    <div class="col-sm-12 col-md-12">
+        <div class="thumbnail">
+            <div class="caption bg-primary">No connection found</div>
+            <div class="container-fluid bg-danger">
+                Search your connection and get connected. Click option Records > Search. Find your connection and get connected.
+            </div>
         </div>
     </div>
 </div>
-
-<p *ngIf="showDropDown" class="bg-danger"><b>Selected Connection</b>: {{currentConnection}}</p>
-
-<button *ngIf="showDropDown" class="btn btn-primary pull-left" (click)="connectionSelected()" [disabled]="currentConnection === ''"><i class="fa fa-check-circle"></i> Submit Connection</button>

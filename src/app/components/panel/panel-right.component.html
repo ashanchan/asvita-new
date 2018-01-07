@@ -1,7 +1,7 @@
 <div class="col-md-3 col-sm-12 pull-right" *ngIf="isActive">
     <div class="thumbnail">
         <div class="caption bg-primary">User Profile</div>
-        <img [src]="details['profileImgUrl'] | profileImg " alt="Avatar" class="img-circle ">
+        <img [src]="details['profileImgUrl'] | profileImg " onError="this.src='../../assets/images/blank-user.jpg'" alt="Avatar" class="img-circle ">
         <p class="bg-info"><i class="fa fa-id-card fa-fw"></i> {{details['userId']}}</p>
         <p class="bg-info"><i class="fa fa-user-circle  fa-fw"></i> {{details['fullName']}} </p>
         <p class="bg-info"><i class="fa fa-envelope  fa-fw"></i> {{details['email']}} </p>

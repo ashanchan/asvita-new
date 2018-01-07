@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from '../../services/data.service';
 
 @Component({
@@ -6,13 +6,16 @@ import { DataService } from '../../services/data.service';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit, OnDestroy {
   private mode:string = '';
 
   constructor(private dataService: DataService) { }
-
+  //==============================================================================
   ngOnInit() {
     this.mode = this.dataService.getUserMode()
   }
-
+  //==============================================================================
+  public ngOnDestroy() {
+  }
+  //==============================================================================
 }

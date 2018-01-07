@@ -51,7 +51,8 @@ export class PanelRightComponent implements OnInit, OnDestroy {
         this.dataService.setSubscription('usedSpace', message.responseData.data.diskSpace);
         let profileInfo = this.dataService.getProfileData();
         let profileSub = this.dataService.getSubscription();
-        this.details['profileImgUrl'] = this.dataService.getFolderPath() + 'profile.jpg'
+        this.details['profileImgUrl'] = this.dataService.getRootPath() + profileInfo['userId'] + '/profile.jpg';
+        this.dataService.getFolderPath() + 'profile.jpg'
         this.details['userId'] = profileInfo['userId'];
         this.details['email'] = profileInfo['email'];
         this.details['fullName'] = profileInfo['fullName'];

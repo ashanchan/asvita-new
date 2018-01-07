@@ -3,7 +3,6 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { DataService } from '../../services/data.service';
 import { MessageService } from '../../services/message.service';
 import { Subscription } from 'rxjs/Subscription';
-import { Router } from '@angular/router';
 
 import { HttpRequest } from '../../models/http-request';
 import { HttpResponse } from '../../models/http-response';
@@ -13,7 +12,7 @@ import { HttpResponse } from '../../models/http-response';
   templateUrl: './change.component.html'
 })
 export class ChangeComponent implements OnInit, OnDestroy {
-  constructor(private formBuilder: FormBuilder, private messageService: MessageService, private dataService: DataService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private messageService: MessageService, private dataService: DataService) { }
   //==============================================================================
   private form;
   private hasError: boolean = false;
